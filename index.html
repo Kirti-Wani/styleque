@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Home | Fashion Store</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- Navbar -->
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="active">Home</a>
+      <a href="Men.html">Men</a>
+      <a href="Women.html">Women</a>
+      <a href="cart.html">Cart</a>
+    </nav>
+  </header>
+
+
+  <!-- Banner with Carousel -->
+  <section class="banner-carousel">
+    <div class="carousel-wrapper">
+      <div class="carousel-slide fade">
+        <img src="images/home-banner1.jpg" alt="New Arrivals 1" style="height: 500px;width: 1500px;";" >
+      </div>
+      <div class="carousel-slide fade">
+        <img src="images/home-banner2.png" alt="New Arrivals 2" style="height: 500px;width: 1500px;">
+      </div>
+      
+      
+    <div class="hero-text">
+      <h1>Welcome to <span class="highlight">Fashion Store</span></h1>
+      <p>Discover new styles and trends now!</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Fashion Store. All rights reserved.</p>
+  </footer>
+
+  <script>
+    let slideIndex = 0;
+    const showSlides = () => {
+      const slides = document.getElementsByClassName("carousel-slide");
+      for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+      slideIndex++;
+      if (slideIndex > slides.length) { slideIndex = 1; }
+      slides[slideIndex - 1].style.display = "block";
+      setTimeout(showSlides, 3000);
+    };
+    document.addEventListener("DOMContentLoaded", showSlides);
+
+    // Add to Cart Functionality
+    const addToCartButtons = document.querySelectorAll(".add-to-cart");
+
+    addToCartButtons.forEach(button => {
+      button.addEventListener("click", (e) => {
+        const productName = e.target.getAttribute("data-name");
+        const productPrice = e.target.getAttribute("data-price");
+
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+        const product = {
+          name: productName,
+          price: productPrice,
+        };
+
+        cart.push(product);
+        localStorage.setItem("cart", JSON.stringify(cart));
+
+        alert(`${productName} has been added to your cart.`);
+      });
+    });
+  </script>
+</body>
+</html>
